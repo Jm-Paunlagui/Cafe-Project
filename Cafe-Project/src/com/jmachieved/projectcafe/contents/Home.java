@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author johnp
@@ -34,13 +33,13 @@ public class Home extends javax.swing.JFrame {
 
         initComponents();
         setIcon();
-        
-        setBackground(new Color(0,0,0,0));
-        
+
+        setBackground(new Color(0, 0, 0, 0));
+
         add_to_cart.getTableHeader()
                 .setFont(
                         new Font(
-                                "Yu Gothic UI Semibold", Font.PLAIN,12
+                                "Yu Gothic UI Semibold", Font.PLAIN, 12
                         )
                 );
         add_to_cart.getTableHeader()
@@ -50,17 +49,17 @@ public class Home extends javax.swing.JFrame {
         add_to_cart.getTableHeader()
                 .setBackground(
                         new Color(
-                                79,52,45
+                                79, 52, 45
                         )
                 );
         add_to_cart.getTableHeader()
                 .setForeground(
                         new Color(
-                                240,240,240
+                                240, 240, 240
                         )
                 );
         add_to_cart.setRowHeight(12);
-       
+
     }
 
     /**
@@ -1187,8 +1186,12 @@ public class Home extends javax.swing.JFrame {
         add_to_cart.setRowMargin(0);
         add_to_cart.setSelectionBackground(new java.awt.Color(121, 85, 72));
         add_to_cart.setShowGrid(false);
-        add_to_cart.setShowVerticalLines(false);
         add_to_cart.getTableHeader().setReorderingAllowed(false);
+        add_to_cart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                add_to_cartMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(add_to_cart);
 
         btnRemoveToCart.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
@@ -1302,22 +1305,23 @@ public class Home extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-   
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage("src\\com\\jmachieved\\projectcafe\\contents\\icons\\icoo.png"));
     }
-    
-    private final ImageIcon iCoffee = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\micon.png");
-    private final ImageIcon dollar = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\dollar.png");
-    private final ImageIcon warning = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\warning.png");
-    private final ImageIcon insufficient = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\insufficient.png");
-    private final ImageIcon thankyou = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\ordersuccess.png");
-    private final ImageIcon verified = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\verified.png");
-    
+
+    private final ImageIcon iCoffee = new ImageIcon(getClass().getResource("micon.png"));
+    private final ImageIcon dollar = new ImageIcon(getClass().getResource("dollar.png"));
+    private final ImageIcon warning = new ImageIcon(getClass().getResource("warning.png"));
+    private final ImageIcon insufficient = new ImageIcon(getClass().getResource("insufficient.png"));
+    private final ImageIcon thankyou = new ImageIcon(getClass().getResource("ordersuccess.png"));
+    private final ImageIcon verified = new ImageIcon(getClass().getResource("verified.png"));
+
     private int respons, confirm;
-    
-    private final ImageIcon iClosing = new ImageIcon("src\\com\\jmachieved\\projectcafe\\contents\\icons\\closee.png");
-    
+
+    private final ImageIcon iClosing = new ImageIcon(getClass().getResource("closee.png"));
+
+
     private void lbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCloseMouseClicked
         // TODO add your handling code here:
 
@@ -1370,20 +1374,20 @@ public class Home extends javax.swing.JFrame {
     //Total Price
     double PRICE, CASH = 0, CHANGE, TOTALS;
 
-        /* Instead of asking the user to what to order i made a 
+    /* Instead of asking the user to what to order i made a 
          * parameter then it gets the order in the buttons and assigned
          * what string(Order) they are.
-         */
+     */
     private void getOrder(String Order) {
 
         int index = 0, ORDERS;
-        
+
         for (String cafe : menu) { //Enhanced For Loop
             if (Order.equals(cafe)) { // So if its equal to the order that i assigned every button then it indexes to the menu.
                 try {
                     respons = JOptionPane.showConfirmDialog(
                             this, "Verifying...",
-                            "ORDERING | " + Order, JOptionPane.YES_NO_OPTION, 
+                            "ORDERING | " + Order, JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE, verified
                     );
                     switch (respons) {
@@ -1391,7 +1395,7 @@ public class Home extends javax.swing.JFrame {
                             ORDERS = Integer.parseInt((String) JOptionPane.showInputDialog(
                                     this, "How many orders do you want?", "ORDERING | " + Order,
                                     JOptionPane.INFORMATION_MESSAGE, iCoffee, null, null
-                                )
+                            )
                             );
                             break;
                         case JOptionPane.NO_OPTION:
@@ -1406,8 +1410,8 @@ public class Home extends javax.swing.JFrame {
                             return;
                     }
 
-                    PRICE =  (prices[index] * ORDERS); // Operation.
-                    PRICE =  (Math.round(PRICE * 100.0) / 100.0); // Two decimal places
+                    PRICE = (prices[index] * ORDERS); // Operation.
+                    PRICE = (Math.round(PRICE * 100.0) / 100.0); // Two decimal places
 
                     confirm = JOptionPane.showConfirmDialog(
                             this, "QTY : " + ORDERS + "\n"
@@ -1418,8 +1422,8 @@ public class Home extends javax.swing.JFrame {
                     );
                     if (confirm == JOptionPane.YES_OPTION) {
                         //getCash(Order);
-                       addToCart(ORDERS,Order,index);
-                       Totals();
+                        addToCart(ORDERS, Order, index);
+                        Totals();
                     } else {
                         return;
                     }
@@ -1438,57 +1442,88 @@ public class Home extends javax.swing.JFrame {
 
     private void getCash(String Order) {
         CASH = Double.parseDouble(
-                    (String) JOptionPane.showInputDialog(
-                            this, "CASH ONLY  $" + PRICE, "ORDERED | " + Order,
-                            JOptionPane.INFORMATION_MESSAGE, dollar, null, null
-                        )
-                    );
+                (String) JOptionPane.showInputDialog(
+                        this, "CASH ONLY  $" + PRICE, "ORDERED | " + Order,
+                        JOptionPane.INFORMATION_MESSAGE, dollar, null, null
+                )
+        );
         getChange(Order);
-  
+
     }
 
     private void getChange(String Order) {
-        CHANGE = CASH - PRICE  ;
-        CHANGE = Math.round(CHANGE*100)/100;
+        CHANGE = CASH - PRICE;
+        CHANGE = Math.round(CHANGE * 100) / 100;
         if (CASH > PRICE) {
             JOptionPane.showMessageDialog(
-                null, "Your change is $" + CHANGE, "ORDER SUCCESS", 
-                JOptionPane.INFORMATION_MESSAGE, thankyou
+                    null, "Your change is $" + CHANGE, "ORDER SUCCESS",
+                    JOptionPane.INFORMATION_MESSAGE, thankyou
             );
-             new ThankYou().setVisible(true);
-        }else if(CASH == PRICE){
-             new ThankYou().setVisible(true);
-        }else{
+            new ThankYou().setVisible(true);
+        } else if (CASH == PRICE) {
+            new ThankYou().setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(
-                    null, "You need more or equal to $" + 
-                    PRICE, "INSUFFICIENT CASH", JOptionPane.WARNING_MESSAGE, insufficient
+                    null, "You need more or equal to $"
+                    + PRICE, "INSUFFICIENT CASH", JOptionPane.WARNING_MESSAGE, insufficient
             );
             getCash(Order);
         }
     }
     
-    @SuppressWarnings("unchecked")
-    private void addToCart(Object ORDERS, Object Order, int index){
-        DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
-        Vector _vector = new  Vector();
-        
-        _vector.add(ORDERS);
-        _vector.add(Order);
-       // _vector.add(prices[index]);
-        _vector.add(PRICE);
-        
-        _Order.addRow(_vector);
-    }
-    
-    private void Totals(){
+    private void Totals() {
         TOTALS = 0.00;
-        for(int ordered = 0 ; ordered < add_to_cart.getRowCount(); ordered++ ){
+        for (int ordered = 0; ordered < add_to_cart.getRowCount(); ordered++) {
             TOTALS += Double.parseDouble(add_to_cart.getValueAt(ordered, 2).toString());
             //TOTALS = Math.round(TOTALS * 100)/100;
         }
-        txtTOTALS.setText("$ "+TOTALS);
+        txtTOTALS.setText("$ " + TOTALS);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void addToCart(Object ORDERS, Object Order, int index) {
+        DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
+        Vector _vector = new Vector();
+
+        _vector.add(ORDERS);
+        _vector.add(Order);
+        // _vector.add(prices[index]);
+        _vector.add(PRICE);
+
+        _Order.addRow(_vector);
     }
     
+    private void removeOrder(){
+         try {
+        
+            respons = JOptionPane.showConfirmDialog(
+                    this, "VOIDING ORDER...",
+                    "VOIDING ORDER", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, warning
+            );
+            switch (respons) {
+                case JOptionPane.YES_OPTION:
+                    DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
+                    int Selected_row_indexed = add_to_cart.getSelectedRow();
+                    _Order.removeRow(Selected_row_indexed);
+                    Totals();
+                    break;
+                case JOptionPane.NO_OPTION:
+                    return; 
+                case JOptionPane.CLOSED_OPTION:
+                    return;
+                default:
+                    break;
+            }
+
+        } catch (ArrayIndexOutOfBoundsException obe) {
+            JOptionPane.showMessageDialog(
+                    null, "An error occured, Try again...",
+                    "Error...", JOptionPane.WARNING_MESSAGE, warning
+            );
+        }
+    }
+
     //---------------------------------------------------------------1st button
     private void btnCA1SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA1SSActionPerformed
         // TODO add your handling code here:
@@ -1638,6 +1673,12 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRemoveToCartActionPerformed
 
+    private void add_to_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_to_cartMouseClicked
+        
+        // TODO add your handling code here:
+       removeOrder();
+    }//GEN-LAST:event_add_to_cartMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1658,7 +1699,7 @@ public class Home extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         //</editor-fold>
 
         /* Create and display the form */
