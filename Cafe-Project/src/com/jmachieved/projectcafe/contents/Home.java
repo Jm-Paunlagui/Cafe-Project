@@ -28,18 +28,26 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
     private static boolean max = true;
-
+    private int respons, confirm;
+    private final ImageIcon iCoffee = new ImageIcon(getClass().getResource("micon.png"));
+    private final ImageIcon dollar = new ImageIcon(getClass().getResource("dollar.png"));
+    private final ImageIcon warning = new ImageIcon(getClass().getResource("warning.png"));
+    private final ImageIcon insufficient = new ImageIcon(getClass().getResource("insufficient.png"));
+    private final ImageIcon thankyou = new ImageIcon(getClass().getResource("ordersuccess.png"));
+    private final ImageIcon verified = new ImageIcon(getClass().getResource("verified.png"));
+    private final ImageIcon iClosing = new ImageIcon(getClass().getResource("closee.png"));
+    
     public Home() {
 
         initComponents();
         setIcon();
-
+        Totals();
         setBackground(new Color(0, 0, 0, 0));
 
         add_to_cart.getTableHeader()
                 .setFont(
                         new Font(
-                                "Yu Gothic UI Semibold", Font.PLAIN, 12
+                                "Yu Gothic UI Semibold", Font.PLAIN, 18
                         )
                 );
         add_to_cart.getTableHeader()
@@ -58,7 +66,7 @@ public class Home extends javax.swing.JFrame {
                                 240, 240, 240
                         )
                 );
-        add_to_cart.setRowHeight(12);
+        add_to_cart.setRowHeight(24);
 
     }
 
@@ -146,8 +154,9 @@ public class Home extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         add_to_cart = new javax.swing.JTable();
-        btnRemoveToCart = new javax.swing.JButton();
         txtTOTALS = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        btnCheckOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("[cafe]");
@@ -233,8 +242,7 @@ public class Home extends javax.swing.JFrame {
         jLabel3.setToolTipText("Water, Brewed Espresso.");
 
         ord1.setBackground(new java.awt.Color(204, 204, 204));
-        ord1.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord1.setForeground(new java.awt.Color(102, 102, 102));
+        ord1.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord1.setText("Caffe America");
         ord1.setAlignmentX(0.5F);
         ord1.setAlignmentY(0.0F);
@@ -245,17 +253,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea2.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
         jTextArea2.setText("Espresso shots are topped with hot water to produce a light layer of crema. The result is this wonderfully rich cup with depth and nuance.");
         jTextArea2.setToolTipText("");
         jTextArea2.setWrapStyleWord(true);
         jTextArea2.setAutoscrolls(false);
-        jTextArea2.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea2.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea2.setEnabled(false);
         jTextArea2.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(75, 44, 32));
         jLabel11.setText("$5.49");
 
         btnCA1SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -345,8 +355,7 @@ public class Home extends javax.swing.JFrame {
         jLabel4.setToolTipText("Milk, Brewed Espresso, Mocha Sauce, Whipped Cream");
 
         ord2.setBackground(new java.awt.Color(204, 204, 204));
-        ord2.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord2.setForeground(new java.awt.Color(102, 102, 102));
+        ord2.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord2.setText("Caffe Mocha");
         ord2.setAlignmentX(0.5F);
         ord2.setAlignmentY(0.0F);
@@ -357,17 +366,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea3.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea3.setColumns(20);
         jTextArea3.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea3.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea3.setLineWrap(true);
         jTextArea3.setRows(5);
         jTextArea3.setText("We combine our rich, full-bodied espresso with bittersweet mocha sauce and steamed milk, then top it off with sweetened whipped cream. ");
         jTextArea3.setToolTipText("");
         jTextArea3.setWrapStyleWord(true);
         jTextArea3.setAutoscrolls(false);
-        jTextArea3.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea3.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea3.setEnabled(false);
         jTextArea3.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel20.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(75, 44, 32));
         jLabel20.setText("$9.59");
 
         btnCM2SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -465,8 +476,7 @@ public class Home extends javax.swing.JFrame {
         jLabel6.setToolTipText("Milk, Brewed Espresso, Vanilla Syrup, Caramel Sauce");
 
         ord3.setBackground(new java.awt.Color(204, 204, 204));
-        ord3.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord3.setForeground(new java.awt.Color(102, 102, 102));
+        ord3.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord3.setText("Caramel Macchiato");
         ord3.setAlignmentX(0.5F);
         ord3.setAlignmentY(0.0F);
@@ -477,17 +487,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea4.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea4.setColumns(20);
         jTextArea4.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea4.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea4.setLineWrap(true);
         jTextArea4.setRows(5);
         jTextArea4.setText("Freshly steamed milk with vanilla-flavored syrup is marked with espresso and topped with caramel drizzle for an oh-so-sweet finish.");
         jTextArea4.setToolTipText("");
         jTextArea4.setWrapStyleWord(true);
         jTextArea4.setAutoscrolls(false);
-        jTextArea4.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea4.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea4.setEnabled(false);
         jTextArea4.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel21.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(75, 44, 32));
         jLabel21.setText("$7.89");
         jLabel21.setToolTipText("");
 
@@ -580,8 +592,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5.setToolTipText("Milk, Brewed Espresso.");
 
         ord4.setBackground(new java.awt.Color(204, 204, 204));
-        ord4.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord4.setForeground(new java.awt.Color(102, 102, 102));
+        ord4.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord4.setText("Cappuccino");
         ord4.setAlignmentX(0.5F);
         ord4.setAlignmentY(0.0F);
@@ -592,17 +603,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea5.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea5.setColumns(20);
         jTextArea5.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea5.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea5.setLineWrap(true);
         jTextArea5.setRows(5);
         jTextArea5.setText("Dark, rich espresso lies in wait under a smoothed and stretched layer of thick foam. It’s truly the height of our baristas’ craft.");
         jTextArea5.setToolTipText("");
         jTextArea5.setWrapStyleWord(true);
         jTextArea5.setAutoscrolls(false);
-        jTextArea5.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea5.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea5.setEnabled(false);
         jTextArea5.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel22.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(75, 44, 32));
         jLabel22.setText("$6.79");
 
         btnCP4SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -701,8 +714,7 @@ public class Home extends javax.swing.JFrame {
         jLabel8.setToolTipText("Brewed Espresso, Velvety Crema");
 
         ord5.setBackground(new java.awt.Color(204, 204, 204));
-        ord5.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord5.setForeground(new java.awt.Color(102, 102, 102));
+        ord5.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord5.setText("Espresso");
         ord5.setAlignmentX(0.5F);
         ord5.setAlignmentY(0.0F);
@@ -713,17 +725,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea6.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea6.setColumns(20);
         jTextArea6.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea6.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea6.setLineWrap(true);
         jTextArea6.setRows(5);
         jTextArea6.setText("Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.");
         jTextArea6.setToolTipText("");
         jTextArea6.setWrapStyleWord(true);
         jTextArea6.setAutoscrolls(false);
-        jTextArea6.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea6.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea6.setEnabled(false);
         jTextArea6.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel23.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(75, 44, 32));
         jLabel23.setText("$4.19");
 
         btnES5SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -820,8 +834,7 @@ public class Home extends javax.swing.JFrame {
         jLabel7.setToolTipText("Milk, Brewed Espresso.");
 
         ord6.setBackground(new java.awt.Color(204, 204, 204));
-        ord6.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord6.setForeground(new java.awt.Color(102, 102, 102));
+        ord6.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord6.setText("Flat White");
         ord6.setAlignmentX(0.5F);
         ord6.setAlignmentY(0.0F);
@@ -832,17 +845,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea7.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea7.setColumns(20);
         jTextArea7.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea7.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea7.setLineWrap(true);
         jTextArea7.setRows(5);
         jTextArea7.setText("Bold ristretto shots of espresso get the perfect amount of steamed whole milk to create a not too strong, not too creamy, just right flavor.");
         jTextArea7.setToolTipText("");
         jTextArea7.setWrapStyleWord(true);
         jTextArea7.setAutoscrolls(false);
-        jTextArea7.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea7.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea7.setEnabled(false);
         jTextArea7.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel24.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(75, 44, 32));
         jLabel24.setText("$7.39");
 
         btnFW6SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -906,10 +921,13 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(ord6))
                             .addGroup(jPflatwhiteLayout.createSequentialGroup()
                                 .addGap(36, 36, 36)
-                                .addComponent(jLabel7))
-                            .addComponent(jTextArea7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel7)))
+                        .addGap(0, 36, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPflatwhiteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextArea7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPflatwhiteLayout.setVerticalGroup(
             jPflatwhiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,8 +954,7 @@ public class Home extends javax.swing.JFrame {
         jLabel9.setToolTipText("Ice, Water, Brewed Espresso.");
 
         ord7.setBackground(new java.awt.Color(204, 204, 204));
-        ord7.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord7.setForeground(new java.awt.Color(102, 102, 102));
+        ord7.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord7.setText("Caffe Americano");
         ord7.setAlignmentX(0.5F);
         ord7.setAlignmentY(0.0F);
@@ -948,17 +965,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea8.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea8.setColumns(20);
         jTextArea8.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea8.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea8.setLineWrap(true);
         jTextArea8.setRows(5);
         jTextArea8.setText(" Espresso shots are topped with water to produce a light layer of crema, then served over ice.");
         jTextArea8.setToolTipText("");
         jTextArea8.setWrapStyleWord(true);
         jTextArea8.setAutoscrolls(false);
-        jTextArea8.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea8.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea8.setEnabled(false);
         jTextArea8.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel25.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(75, 44, 32));
         jLabel25.setText("$8.29");
 
         btnCA7SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -1050,8 +1069,7 @@ public class Home extends javax.swing.JFrame {
         jLabel10.setToolTipText("Milk, White Chocolate Mocha Sauce, Brewed Espresso, Whipped Cream ");
 
         ord8.setBackground(new java.awt.Color(204, 204, 204));
-        ord8.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
-        ord8.setForeground(new java.awt.Color(102, 102, 102));
+        ord8.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 18)); // NOI18N
         ord8.setText("White Choco Mocha");
         ord8.setAlignmentX(0.5F);
         ord8.setAlignmentY(0.0F);
@@ -1062,17 +1080,19 @@ public class Home extends javax.swing.JFrame {
         jTextArea9.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea9.setColumns(20);
         jTextArea9.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea9.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea9.setLineWrap(true);
         jTextArea9.setRows(5);
         jTextArea9.setText("Our signature espresso meets white chocolate sauce and steamed milk, then is finished off with sweetened whipped cream in this white chocolate delight.");
         jTextArea9.setToolTipText("");
         jTextArea9.setWrapStyleWord(true);
         jTextArea9.setAutoscrolls(false);
-        jTextArea9.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextArea9.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         jTextArea9.setEnabled(false);
         jTextArea9.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         jLabel26.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(75, 44, 32));
         jLabel26.setText("$9.89");
 
         btnWCM8SS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/jmachieved/projectcafe/contents/icons/small.png"))); // NOI18N
@@ -1160,11 +1180,11 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel27.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        jLabel27.setText("Your order");
+        jLabel27.setFont(new java.awt.Font("Monospaced", 0, 36)); // NOI18N
+        jLabel27.setText("YOUR ORDER");
 
         add_to_cart.setAutoCreateRowSorter(true);
-        add_to_cart.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        add_to_cart.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         add_to_cart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1194,44 +1214,55 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(add_to_cart);
 
-        btnRemoveToCart.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
-        btnRemoveToCart.setText("Remove to Cart");
-        btnRemoveToCart.addActionListener(new java.awt.event.ActionListener() {
+        txtTOTALS.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+
+        jLabel12.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel12.setText("Total");
+
+        btnCheckOut.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        btnCheckOut.setText("CHECKOUT");
+        btnCheckOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveToCartActionPerformed(evt);
+                btnCheckOutActionPerformed(evt);
             }
         });
-
-        txtTOTALS.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel27)
-                .addGap(181, 181, 181))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTOTALS, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnRemoveToCart)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33))
+                .addGap(165, 165, 165)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTOTALS, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel27)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTOTALS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addComponent(btnRemoveToCart)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTOTALS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(66, 66, 66)
+                .addComponent(btnCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1240,7 +1271,7 @@ public class Home extends javax.swing.JFrame {
         mainLayout.setHorizontalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPcaffeamerica, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                     .addComponent(jPespresso, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
@@ -1258,12 +1289,12 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jPcappuccino, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
                 .addGap(43, 43, 43)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainLayout.createSequentialGroup()
                         .addComponent(jPcaffeamerica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1310,18 +1341,6 @@ public class Home extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage("src\\com\\jmachieved\\projectcafe\\contents\\icons\\icoo.png"));
     }
 
-    private final ImageIcon iCoffee = new ImageIcon(getClass().getResource("micon.png"));
-    private final ImageIcon dollar = new ImageIcon(getClass().getResource("dollar.png"));
-    private final ImageIcon warning = new ImageIcon(getClass().getResource("warning.png"));
-    private final ImageIcon insufficient = new ImageIcon(getClass().getResource("insufficient.png"));
-    private final ImageIcon thankyou = new ImageIcon(getClass().getResource("ordersuccess.png"));
-    private final ImageIcon verified = new ImageIcon(getClass().getResource("verified.png"));
-
-    private int respons, confirm;
-
-    private final ImageIcon iClosing = new ImageIcon(getClass().getResource("closee.png"));
-
-
     private void lbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCloseMouseClicked
         // TODO add your handling code here:
 
@@ -1364,15 +1383,15 @@ public class Home extends javax.swing.JFrame {
     };
     //Menu
     private static final String[] menu = {
-        "S-CaffeAmerica", "S-CaffeMocha", "S-CaramelMacchiato", "S-Cappuccino",
-        "S-Espresso", "S-FlatWhite", "S-CaffeAmericano", "S-WhiteChocoMocha",
-        "M-CaffeAmerica", "M-CaffeMocha", "M-CaramelMacchiato", "M-Cappuccino",
-        "M-Espresso", "M-FlatWhite", "M-CaffeAmericano", "M-WhiteChocoMocha",
-        "L-CaffeAmerica", "L-CaffeMocha", "L-CaramelMacchiato", "L-Cappuccino",
-        "L-Espresso", "L-FlatWhite", "L-CaffeAmericano", "L-WhiteChocoMocha"
+        "S-CffAmrc", "S-CffMch", "S-CrmlMccht", "S-Cppccn",
+        "S-Esprss", "S-FltWht", "S-CffAmrcn", "S-WhtChcMch",
+        "M-CffAmrc", "M-CffMch", "M-CrmlMccht", "M-Cppccn",
+        "M-Esprss", "M-FltWht", "M-CffAmrcn", "M-WhtChcMch",
+        "L-CffAmrc", "L-CffMch", "L-CrmlMccht", "L-Cppccn",
+        "L-Esprss", "L-FltWht", "L-CffAmrcn", "L-WhtChcMch"
     };
     //Total Price
-    double PRICE, CASH = 0, CHANGE, TOTALS;
+    private double PRICE, CASH = 0, CHANGE, TOTALS;
 
     /* Instead of asking the user to what to order i made a 
          * parameter then it gets the order in the buttons and assigned
@@ -1422,7 +1441,7 @@ public class Home extends javax.swing.JFrame {
                     );
                     if (confirm == JOptionPane.YES_OPTION) {
                         //getCash(Order);
-                        addToCart(ORDERS, Order, index);
+                        addToCart(ORDERS, Order);
                         Totals();
                     } else {
                         return;
@@ -1439,19 +1458,18 @@ public class Home extends javax.swing.JFrame {
             index++;// Navigates the price of the ordered item.
         }
     }
-
-    private void getCash(String Order) {
-        CASH = Double.parseDouble(
-                (String) JOptionPane.showInputDialog(
-                        this, "CASH ONLY  $" + PRICE, "ORDERED | " + Order,
+    //CASH
+    private void getCash(String Totals) {
+        CASH = Double.parseDouble((String) 
+                JOptionPane.showInputDialog(
+                        this, "CASH ONLY " + Totals, "PAYMENT",
                         JOptionPane.INFORMATION_MESSAGE, dollar, null, null
-                )
-        );
-        getChange(Order);
+                ));
+        getChange(Totals);
 
     }
-
-    private void getChange(String Order) {
+    //CHANGE
+    private void getChange(String Totals) {
         CHANGE = CASH - PRICE;
         CHANGE = Math.round(CHANGE * 100) / 100;
         if (CASH > PRICE) {
@@ -1467,10 +1485,10 @@ public class Home extends javax.swing.JFrame {
                     null, "You need more or equal to $"
                     + PRICE, "INSUFFICIENT CASH", JOptionPane.WARNING_MESSAGE, insufficient
             );
-            getCash(Order);
+            getCash(Totals);
         }
     }
-    
+    //SUM OF ALL ORDERS
     private void Totals() {
         TOTALS = 0.00;
         for (int ordered = 0; ordered < add_to_cart.getRowCount(); ordered++) {
@@ -1479,9 +1497,9 @@ public class Home extends javax.swing.JFrame {
         }
         txtTOTALS.setText("$ " + TOTALS);
     }
-
-    @SuppressWarnings("unchecked")
-    private void addToCart(Object ORDERS, Object Order, int index) {
+    //ADD TO CART
+    @SuppressWarnings({"unchecked", "unchecked"})
+    private void addToCart(Object ORDERS, Object Order) {
         DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
         Vector _vector = new Vector();
 
@@ -1492,10 +1510,9 @@ public class Home extends javax.swing.JFrame {
 
         _Order.addRow(_vector);
     }
-    
+    //REMOVE TO CART
     private void removeOrder(){
          try {
-        
             respons = JOptionPane.showConfirmDialog(
                     this, "VOIDING ORDER...",
                     "VOIDING ORDER", JOptionPane.YES_NO_OPTION,
@@ -1515,7 +1532,6 @@ public class Home extends javax.swing.JFrame {
                 default:
                     break;
             }
-
         } catch (ArrayIndexOutOfBoundsException obe) {
             JOptionPane.showMessageDialog(
                     null, "An error occured, Try again...",
@@ -1523,89 +1539,88 @@ public class Home extends javax.swing.JFrame {
             );
         }
     }
-
     //---------------------------------------------------------------1st button
     private void btnCA1SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA1SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-CaffeAmerica"; //Sets the string to Order
+        String Order = "S-CffAmrc"; //Sets the string to Order
         getOrder(Order); // The param gets it and sets the value in the getOrder
     }//GEN-LAST:event_btnCA1SSActionPerformed
     //---------------------------------------------------------------2nd button
     private void btnCM2SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM2SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-CaffeMocha";
+        String Order = "S-CffMch";
         getOrder(Order);
     }//GEN-LAST:event_btnCM2SSActionPerformed
     //---------------------------------------------------------------3rd button
     private void btnCM3SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM3SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-CaramelMacchiato";
+        String Order = "S-CrmlMccht";
         getOrder(Order);
     }//GEN-LAST:event_btnCM3SSActionPerformed
     //---------------------------------------------------------------4th button
     private void btnCP4SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCP4SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-Cappuccino";
+        String Order = "S-Cppccn";
         getOrder(Order);
     }//GEN-LAST:event_btnCP4SSActionPerformed
     //---------------------------------------------------------------5th button
     private void btnES5SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnES5SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-Espresso";
+        String Order = "S-Esprss";
         getOrder(Order);
     }//GEN-LAST:event_btnES5SSActionPerformed
     //---------------------------------------------------------------6th button
     private void btnFW6SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFW6SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-FlatWhite";
+        String Order = "S-FltWht";
         getOrder(Order);
     }//GEN-LAST:event_btnFW6SSActionPerformed
     //---------------------------------------------------------------7th button
     private void btnCA7SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA7SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-CaffeAmericano";
+        String Order = "S-CffAmrcn";
         getOrder(Order);
     }//GEN-LAST:event_btnCA7SSActionPerformed
     //---------------------------------------------------------------8th button
     private void btnWCM8SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWCM8SSActionPerformed
         // TODO add your handling code here:
-        String Order = "S-WhiteChocoMocha";
+        String Order = "S-WhtChcMch";
         getOrder(Order);
     }//GEN-LAST:event_btnWCM8SSActionPerformed
 
     private void btnCA2LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA2LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-CaffeAmerica"; //Sets the string to Order
+        String Order = "L-CffAmrc"; //Sets the string to Order
         getOrder(Order); // The param gets it and sets the value in the getOrder
     }//GEN-LAST:event_btnCA2LLActionPerformed
 
     private void btnCA2MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA2MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-CaffeAmerica"; //Sets the string to Order
+        String Order = "M-CffAmrc"; //Sets the string to Order
         getOrder(Order); // The param gets it and sets the value in the getOrder
     }//GEN-LAST:event_btnCA2MMActionPerformed
 
     private void btnCM2MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM2MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-CaffeMocha";
+        String Order = "M-CffMch";
         getOrder(Order);
     }//GEN-LAST:event_btnCM2MMActionPerformed
 
     private void btnCM2LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM2LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-CaffeMocha";
+        String Order = "L-CffMch";
         getOrder(Order);
     }//GEN-LAST:event_btnCM2LLActionPerformed
 
     private void btnCM3MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM3MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-CaramelMacchiato";
+        String Order = "M-CrmlMccht";
         getOrder(Order);
     }//GEN-LAST:event_btnCM3MMActionPerformed
 
     private void btnCM3LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCM3LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-CaramelMacchiato";
+        String Order = "L-CrmlMccht";
         getOrder(Order);
     }//GEN-LAST:event_btnCM3LLActionPerformed
 
@@ -1617,67 +1632,70 @@ public class Home extends javax.swing.JFrame {
 
     private void btnCP4LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCP4LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-Cappuccino";
+        String Order = "L-Cppccn";
         getOrder(Order);
     }//GEN-LAST:event_btnCP4LLActionPerformed
 
     private void btnES5MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnES5MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-Espresso";
+        String Order = "M-Esprss";
         getOrder(Order);
     }//GEN-LAST:event_btnES5MMActionPerformed
 
     private void btnES5LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnES5LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-Espresso";
+        String Order = "L-Esprss";
         getOrder(Order);
     }//GEN-LAST:event_btnES5LLActionPerformed
 
     private void btnFW6MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFW6MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-FlatWhite";
+        String Order = "M-FltWht";
         getOrder(Order);
     }//GEN-LAST:event_btnFW6MMActionPerformed
 
     private void btnFW6LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFW6LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-FlatWhite";
+        String Order = "L-FltWht";
         getOrder(Order);
     }//GEN-LAST:event_btnFW6LLActionPerformed
 
     private void btnCA7MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA7MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-CaffeAmericano";
+        String Order = "M-CffAmrcn";
         getOrder(Order);
     }//GEN-LAST:event_btnCA7MMActionPerformed
 
     private void btnCA7LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA7LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-CaffeAmericano";
+        String Order = "L-CffAmrcn";
         getOrder(Order);
     }//GEN-LAST:event_btnCA7LLActionPerformed
 
     private void btnWCM8MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWCM8MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-WhiteChocoMocha";
+        String Order = "M-WhtChcMch";
         getOrder(Order);
     }//GEN-LAST:event_btnWCM8MMActionPerformed
 
     private void btnWCM8LLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWCM8LLActionPerformed
         // TODO add your handling code here:
-        String Order = "L-WhiteChocoMocha";
+        String Order = "L-WhtChcMch";
         getOrder(Order);
     }//GEN-LAST:event_btnWCM8LLActionPerformed
 
-    private void btnRemoveToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveToCartActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRemoveToCartActionPerformed
-
     private void add_to_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_to_cartMouseClicked
-        
         // TODO add your handling code here:
        removeOrder();
     }//GEN-LAST:event_add_to_cartMouseClicked
+    //Checkout
+    private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
+        // TODO add your handling code here
+        String Totals = txtTOTALS.getText();
+        getCash(Totals);
+        
+        
+    }//GEN-LAST:event_btnCheckOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1690,7 +1708,7 @@ public class Home extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1725,19 +1743,20 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnCP4LL;
     private javax.swing.JButton btnCP4MM;
     private javax.swing.JButton btnCP4SS;
+    private javax.swing.JButton btnCheckOut;
     private javax.swing.JButton btnES5LL;
     private javax.swing.JButton btnES5MM;
     private javax.swing.JButton btnES5SS;
     private javax.swing.JButton btnFW6LL;
     private javax.swing.JButton btnFW6MM;
     private javax.swing.JButton btnFW6SS;
-    private javax.swing.JButton btnRemoveToCart;
     private javax.swing.JButton btnWCM8LL;
     private javax.swing.JButton btnWCM8MM;
     private javax.swing.JButton btnWCM8SS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
