@@ -36,7 +36,7 @@ public class Home extends javax.swing.JFrame {
     private final ImageIcon thankyou = new ImageIcon(getClass().getResource("ordersuccess.png"));
     private final ImageIcon verified = new ImageIcon(getClass().getResource("verified.png"));
     private final ImageIcon iClosing = new ImageIcon(getClass().getResource("closee.png"));
-    
+
     public Home() {
 
         initComponents();
@@ -1392,42 +1392,56 @@ public class Home extends javax.swing.JFrame {
     };
     //Total Price
     private double PRICE, CASH = 0, CHANGE, TOTALS;
+    private int index = 0, ORDERS = 0;
 
+    //Verifying
+    private void verifyAndask(String Order) {
+        respons = JOptionPane.showConfirmDialog(
+                this, "Verifying...",
+                "ORDERING | " + Order, JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, verified
+        );
+        getQTY(Order);
+    }
+    
+    //Get qty
+    private void getQTY(String Order){
+        switch (respons) {
+            case JOptionPane.YES_OPTION:
+                ORDERS = Integer.parseInt(
+                        (String) JOptionPane.showInputDialog(
+                                this, "How many orders do you want?", "ORDERING | " + Order,
+                                JOptionPane.INFORMATION_MESSAGE, iCoffee, null, null
+                        )
+                );
+                if(ORDERS == 0){
+                    getQTY(Order);
+                }
+                
+                break;
+            case JOptionPane.NO_OPTION:
+                JOptionPane.showMessageDialog(
+                        this, "Cancelling...", "CANCELLING | " + Order,
+                        JOptionPane.WARNING_MESSAGE, warning
+                );
+                return;
+            case JOptionPane.CLOSED_OPTION:
+                return;
+            default:
+                return;
+        }
+    }
+    //Get Order
     /* Instead of asking the user to what to order i made a 
          * parameter then it gets the order in the buttons and assigned
          * what string(Order) they are.
      */
     private void getOrder(String Order) {
 
-        int index = 0, ORDERS;
-
         for (String cafe : menu) { //Enhanced For Loop
             if (Order.equals(cafe)) { // So if its equal to the order that i assigned every button then it indexes to the menu.
                 try {
-                    respons = JOptionPane.showConfirmDialog(
-                            this, "Verifying...",
-                            "ORDERING | " + Order, JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE, verified
-                    );
-                    switch (respons) {
-                        case JOptionPane.YES_OPTION:
-                            ORDERS = Integer.parseInt((String) JOptionPane.showInputDialog(
-                                    this, "How many orders do you want?", "ORDERING | " + Order,
-                                    JOptionPane.INFORMATION_MESSAGE, iCoffee, null, null
-                            )
-                            );
-                            break;
-                        case JOptionPane.NO_OPTION:
-                            JOptionPane.showMessageDialog(
-                                    this, "Cancelling...", "CANCELLING | " + Order,
-                                    JOptionPane.WARNING_MESSAGE, warning
-                            );
-                            return;
-                        case JOptionPane.CLOSED_OPTION:
-                            return;
-                        default:
-                            return;
-                    }
+                    verifyAndask(Order);
 
                     PRICE = (prices[index] * ORDERS); // Operation.
                     PRICE = (Math.round(PRICE * 100.0) / 100.0); // Two decimal places
@@ -1457,17 +1471,19 @@ public class Home extends javax.swing.JFrame {
             }
             index++;// Navigates the price of the ordered item.
         }
-    }
-    //CASH
-    private void getCash(String Totals) {
-        CASH = Double.parseDouble((String) 
-                JOptionPane.showInputDialog(
-                        this, "CASH ONLY " + Totals, "PAYMENT",
-                        JOptionPane.INFORMATION_MESSAGE, dollar, null, null
-                ));
-        getChange(Totals);
 
     }
+
+    //CASH
+    private void getCash(String Totals) {
+        CASH = Double.parseDouble((String) JOptionPane.showInputDialog(
+                this, "CASH ONLY " + Totals, "PAYMENT",
+                JOptionPane.INFORMATION_MESSAGE, dollar, null, null
+        ));
+        getChange(Totals);
+        
+    }
+
     //CHANGE
     private void getChange(String Totals) {
         CHANGE = CASH - PRICE;
@@ -1488,6 +1504,7 @@ public class Home extends javax.swing.JFrame {
             getCash(Totals);
         }
     }
+
     //SUM OF ALL ORDERS
     private void Totals() {
         TOTALS = 0.00;
@@ -1497,6 +1514,7 @@ public class Home extends javax.swing.JFrame {
         }
         txtTOTALS.setText("$ " + TOTALS);
     }
+
     //ADD TO CART
     @SuppressWarnings({"unchecked", "unchecked"})
     private void addToCart(Object ORDERS, Object Order) {
@@ -1510,9 +1528,10 @@ public class Home extends javax.swing.JFrame {
 
         _Order.addRow(_vector);
     }
+
     //REMOVE TO CART
-    private void removeOrder(){
-         try {
+    private void removeOrder() {
+        try {
             respons = JOptionPane.showConfirmDialog(
                     this, "VOIDING ORDER...",
                     "VOIDING ORDER", JOptionPane.YES_NO_OPTION,
@@ -1526,7 +1545,7 @@ public class Home extends javax.swing.JFrame {
                     Totals();
                     break;
                 case JOptionPane.NO_OPTION:
-                    return; 
+                    return;
                 case JOptionPane.CLOSED_OPTION:
                     return;
                 default:
@@ -1539,6 +1558,17 @@ public class Home extends javax.swing.JFrame {
             );
         }
     }
+    //Reset list
+    private void ResetOrderList() {
+        DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
+        while (_Order.getRowCount() > 0) {
+            for (int order = 0; order < _Order.getRowCount(); order++) {
+                _Order.removeRow(order);
+            }
+            Totals();
+        }
+    }
+
     //---------------------------------------------------------------1st button
     private void btnCA1SSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCA1SSActionPerformed
         // TODO add your handling code here:
@@ -1626,7 +1656,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnCP4MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCP4MMActionPerformed
         // TODO add your handling code here:
-        String Order = "M-Cappuccino";
+        String Order = "M-Cppccn";
         getOrder(Order);
     }//GEN-LAST:event_btnCP4MMActionPerformed
 
@@ -1686,15 +1716,26 @@ public class Home extends javax.swing.JFrame {
 
     private void add_to_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_to_cartMouseClicked
         // TODO add your handling code here:
-       removeOrder();
+        removeOrder();
     }//GEN-LAST:event_add_to_cartMouseClicked
     //Checkout
+
+
     private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
         // TODO add your handling code here
-        String Totals = txtTOTALS.getText();
-        getCash(Totals);
-        
-        
+        DefaultTableModel _Order = (DefaultTableModel) add_to_cart.getModel();
+
+        if (_Order.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(
+                    null, "Your cart is Empty",
+                    "Empty Cart", JOptionPane.WARNING_MESSAGE, warning
+            );
+        } else {
+            String Totals = txtTOTALS.getText();
+            getCash(Totals);
+            ResetOrderList();
+        }
+
     }//GEN-LAST:event_btnCheckOutActionPerformed
 
     /**
