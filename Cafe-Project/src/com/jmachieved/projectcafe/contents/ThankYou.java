@@ -85,7 +85,7 @@ public class ThankYou extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Script MT Bold", 0, 38)); // NOI18N
         jLabel3.setText("Thank for Ordering with us!");
 
-        btnYourWelcome.setFont(new java.awt.Font("Script MT Bold", 0, 18)); // NOI18N
+        btnYourWelcome.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnYourWelcome.setText("Your Welcome");
         btnYourWelcome.setBorderPainted(false);
         btnYourWelcome.setFocusPainted(false);
