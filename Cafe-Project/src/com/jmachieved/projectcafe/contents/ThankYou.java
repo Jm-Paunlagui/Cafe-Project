@@ -87,7 +87,6 @@ public class ThankYou extends javax.swing.JFrame {
 
         btnYourWelcome.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         btnYourWelcome.setText("Your Welcome");
-        btnYourWelcome.setBorderPainted(false);
         btnYourWelcome.setFocusPainted(false);
         btnYourWelcome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +181,7 @@ public class ThankYou extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
